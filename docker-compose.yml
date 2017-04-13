@@ -1,0 +1,46 @@
+version: "3"
+services:
+  pdns-db:
+    image: mariadb:10.1
+    environment:
+      - MYSQL_DATABASE=pdns
+      - MYSQL_USER=pdns
+      - MYSQL_PASSWORD=passwd
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+  pdns:
+    image: bgpat/docker-pdns:latest
+    environment:
+      - GMYSQL_DBNAME=pdns
+      - GMYSQL_HOST=pdns-db
+      - GMYSQL_PORT=3306
+      - GMYSQL_USER=pdns
+      - GMYSQL_PASSWORD=passwd
+      - WEBSERVER=yes
+      - API=yes
+      - API_KEY=secret
+    links:
+      - pdns-db
+    ports:
+      - "53:53"
+      - "53:53/udp"
+      - "8081"
+  admin-db:
+    image: mariadb:10.1
+    environment:
+      - MYSQL_DATABASE=pdnsadmin
+      - MYSQL_USER=pdnsadmin
+      - MYSQL_PASSWORD=passwd
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+  admin:
+    build: .
+    environment:
+      - DATABASE_URI=mysql://pdnsadmin:passwd@admin-db/pdnsadmin
+      - PDNS_STATS_URL=http://pdns:8081
+      - PDNS_API_KEY=secret
+      - PDNS_VERSION=4.0.3
+    links:
+      - pdns
+      - admin-db
+    ports:
+      - "9393:9393"
+

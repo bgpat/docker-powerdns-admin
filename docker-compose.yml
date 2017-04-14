@@ -32,12 +32,12 @@ services:
       - MYSQL_PASSWORD=passwd
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
   admin:
-    build: .
+    image: bgpat/docker-powerdns-admin:latest
+    #build: .
     environment:
       - DATABASE_URI=mysql://pdnsadmin:passwd@admin-db/pdnsadmin
       - PDNS_STATS_URL=http://pdns:8081
       - PDNS_API_KEY=secret
-      - PDNS_VERSION=4.0.3
     links:
       - pdns
       - admin-db

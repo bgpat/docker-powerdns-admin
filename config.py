@@ -33,17 +33,6 @@ LDAP_SEARCH_BASE = os.getenv('LDAP_SEARCH_BASE', 'ou=System Admins,ou=People,dc=
 LDAP_USERNAMEFIELD = os.getenv('LDAP_USERNAMEFIELD', 'uid')
 LDAP_FILTER = os.getenv('LDAP_FILTER', '(objectClass=inetorgperson)')
 
-## AD CONFIG
-LDAP_TYPE = os.getenv('LDAP_TYPE', 'ad')
-LDAP_URI = os.getenv('LDAP_URI', 'ldaps://your-ad-server:636')
-LDAP_USERNAME = os.getenv('LDAP_USERNAME', 'cn=dnsuser,ou=Users,dc=domain,dc=local')
-LDAP_PASSWORD = os.getenv('LDAP_PASSWORD', 'dnsuser')
-LDAP_SEARCH_BASE = os.getenv('LDAP_SEARCH_BASE', 'dc=domain,dc=local')
-# You may prefer 'userPrincipalName' instead
-LDAP_USERNAMEFIELD = os.getenv('LDAP_USERNAMEFIELD', 'sAMAccountName')
-# AD Group that you would like to have accesss to web app
-LDAP_FILTER = os.getenv('LDAP_FILTER', 'memberof=cn=DNS_users,ou=Groups,dc=domain,dc=local')
-
 # Github Oauth
 GITHUB_OAUTH_ENABLE = os.getenv('GITHUB_OAUTH_ENABLE', 'no') == 'yes'
 GITHUB_OAUTH_KEY = os.getenv('GITHUB_OAUTH_KEY')

@@ -24,7 +24,8 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = os.getenv('DATABASE_TRACK_MODIFICATIONS', 'yes') == 'yes'
 
 # LDAP CONFIG
-LDAP_TYPE = os.getenv('LDAP_TYPE', 'ldap')
+if os.getenv('LDAP_TYPE') != None:
+    LDAP_TYPE = os.getenv('LDAP_TYPE')
 LDAP_URI = os.getenv('LDAP_URI', 'ldaps://your-ldap-server:636')
 LDAP_USERNAME = os.getenv('LDAP_USERNAME', 'cn=dnsuser,ou=users,ou=services,dc=duykhanh,dc=me')
 LDAP_PASSWORD = os.getenv('LDAP_PASSWORD', 'dnsuser')
